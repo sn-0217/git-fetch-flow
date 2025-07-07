@@ -206,14 +206,21 @@ const Home = () => {
   }, [navigateToAdmin]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100" data-page="home">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50/30 relative overflow-hidden" data-page="home">
+      {/* Enhanced background elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 -right-40 w-96 h-96 bg-gradient-to-br from-purple-100/30 to-blue-100/30 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute -bottom-32 -left-32 w-80 h-80 bg-gradient-to-tr from-indigo-100/20 to-pink-100/20 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/3 right-1/4 w-64 h-64 bg-gradient-to-br from-violet-100/15 to-cyan-100/15 rounded-full blur-2xl"></div>
+      </div>
+
       <HomeHeader
         currentEnv={currentEnv}
         onViewSubmissions={handleViewSubmissions}
         onAdminClick={handleAdminClick}
       />
 
-      <div className="max-w-7xl mx-auto px-6 py-8" data-main="home-content">
+      <div className="max-w-8xl mx-auto px-8 py-12 relative z-10" data-main="home-content">
         <HomeHero />
 
         <ApplicationsGrid
@@ -234,7 +241,7 @@ const Home = () => {
         @keyframes fadeInUp {
           from {
             opacity: 0;
-            transform: translateY(30px);
+            transform: translateY(40px);
           }
           to {
             opacity: 1;
