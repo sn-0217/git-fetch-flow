@@ -22,15 +22,17 @@ function App() {
           <ToastProvider>
             <div className="App">
               {showSplash && <SplashScreen onComplete={handleSplashComplete} />}
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/submissions" element={<Index />} />
-                <Route path="/home" element={<Home />} />
-                <Route path="/app/:appName" element={<AppDetail />} />
-                <Route path="/admin" element={<Admin />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-              <Toaster />
+              <div className={`transition-all duration-600 ease-out ${showSplash ? 'opacity-0 transform scale-95 pointer-events-none' : 'opacity-100 transform scale-100'}`}>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/submissions" element={<Index />} />
+                  <Route path="/home" element={<Home />} />
+                  <Route path="/app/:appName" element={<AppDetail />} />
+                  <Route path="/admin" element={<Admin />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+                <Toaster />
+              </div>
             </div>
           </ToastProvider>
         </AuthProvider>
