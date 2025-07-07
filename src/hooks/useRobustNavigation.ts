@@ -1,3 +1,4 @@
+
 import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -10,9 +11,9 @@ export const useRobustNavigation = () => {
 
   const navigateWithCleanup = useCallback((path: string, options?: { replace?: boolean }) => {
     // Clear any pending timeouts or intervals that might interfere
-    const highestTimeoutId = setTimeout(() => {}, 0);
-    for (let i = 1; i <= highestTimeoutId; i++) {
-      clearTimeout(i);
+    const highestTimeoutId = window.setTimeout(() => {}, 0);
+    for (let i = 1; i < highestTimeoutId; i++) {
+      window.clearTimeout(i);
     }
 
     // Use requestAnimationFrame to ensure DOM is ready
