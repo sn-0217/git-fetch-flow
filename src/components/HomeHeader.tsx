@@ -1,10 +1,9 @@
-
 import React, { useState, useCallback } from 'react';
-import { List, Settings, Workflow, Zap } from 'lucide-react';
+import { List, Settings, Shield, Workflow, Zap, Code, Cpu } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/contexts/AuthContext';
 import LoginDialog from './LoginDialog';
-import EnvironmentIndicator from './EnvironmentIndicator';
 
 interface HomeHeaderProps {
   currentEnv: string;
@@ -42,7 +41,7 @@ const HomeHeader: React.FC<HomeHeaderProps> = ({
 
   return (
     <>
-      <header className="sticky top-0 z-50 backdrop-blur-xl bg-white/90 border-b border-slate-200/60 shadow-lg">
+      <header className="sticky top-0 z-50 backdrop-blur-xl bg-white/80 border-b border-slate-200/50 shadow-sm">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4" data-section="header-brand">
@@ -60,7 +59,22 @@ const HomeHeader: React.FC<HomeHeaderProps> = ({
               </div>
             </div>
             <div className="flex items-center gap-4" data-section="header-actions">
-              <EnvironmentIndicator currentEnv={currentEnv} />
+              <Badge className={`gap-2 px-3 py-1.5 font-semibold hover:scale-105 transition-all duration-300 shadow-sm hover:shadow-md ${
+                currentEnv === 'DEV' 
+                  ? 'bg-gradient-to-r from-indigo-100 via-purple-100 to-pink-100 text-indigo-700 border-indigo-200 hover:from-indigo-200 hover:via-purple-200 hover:to-pink-200 hover:shadow-indigo-100/50'
+                  : currentEnv === 'PROD'
+                  ? 'bg-gradient-to-r from-red-50 via-rose-50 to-pink-50 text-red-700 border-red-200 hover:from-red-100 hover:via-rose-100 hover:to-pink-100 hover:shadow-red-100/50'
+                  : 'bg-gradient-to-r from-amber-50 via-yellow-50 to-orange-50 text-amber-700 border-amber-200 hover:from-amber-100 hover:via-yellow-100 hover:to-orange-100 hover:shadow-amber-100/50'
+              }`}>
+                {currentEnv === 'DEV' ? (
+                  <Code className="w-4 h-4" />
+                ) : currentEnv === 'PROD' ? (
+                  <Shield className="w-4 h-4" />
+                ) : (
+                  <Cpu className="w-4 h-4" />
+                )}
+                {currentEnv}
+              </Badge>
               <Button variant="outline" size="sm" className="gap-2 hover:scale-105 transition-transform shadow-sm hover:shadow-md" onClick={handleViewSubmissions} data-action="view-submissions">
                 <List className="w-4 h-4" />
                 Analytics
